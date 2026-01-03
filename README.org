@@ -2,6 +2,16 @@
 #+AUTHOR: Cisco Ramon
 #+DESCRIPTION: A rule-based diagnostic and fix recommendation tool for Linux systems
 #+OPTIONS: toc:2 num:nil
+#+DATE: 2026-01-03
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_THEME: solarized
+#+REVEAL_TRANS: fade
+#+REVEAL_SLIDE_NUMBER: t
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+
+
 
 * Overview
 

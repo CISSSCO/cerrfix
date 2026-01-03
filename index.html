@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Generated on 2026-01-03 Sat 18:47 -->
+<meta charset="utf-8"/>
+<title>cerrfix</title>
+<meta name="author" content="Cisco Ramon"/>
+<meta name="description" content="A rule-based diagnostic and fix recommendation tool for Linux systems"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/solarized.css" id="theme"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">cerrfix</h1><h2 class="author">Cisco Ramon</h2><h2 class="date">2026-01-03</h2><p class="date">Created: 2026-01-03 Sat 18:47</p>
+</section>
+<section id="table-of-contents-section">
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#/slide-org96e053d">Overview</a></li>
+<li><a href="#/slide-org8d09ffd">Motivation</a></li>
+<li><a href="#/slide-org2956dfe">Key Features</a></li>
+<li><a href="#/slide-org24030d7">Project Structure</a></li>
+<li><a href="#/slide-orgfdde560">Requirements</a>
+<ul>
+<li><a href="#/slide-orgdf54bbf">Runtime</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org8446cc8">Installation</a>
+<ul>
+<li><a href="#/slide-org3c3d633">Clone the Repository</a></li>
+<li><a href="#/slide-org8096ef7">Run Installer</a></li>
+<li><a href="#/slide-org243ed7c">Enable CLI Access</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org14de25d">Usage</a>
+<ul>
+<li><a href="#/slide-orgcf3000f">Diagnose an Error Log</a></li>
+<li><a href="#/slide-org8e6dc9c">Add a New Fix</a></li>
+<li><a href="#/slide-orga8b9a58">Update an Existing Fix</a></li>
+<li><a href="#/slide-orge4c0862">Remove a Fix</a></li>
+<li><a href="#/slide-org5f44a56">List Available Fixes</a></li>
+<li><a href="#/slide-org5d12153">Show Fix Details (Raw yaml)</a></li>
+<li><a href="#/slide-org9edf780">Search Fixes</a></li>
+<li><a href="#/slide-orgcf6fc6c">Show statistics</a></li>
+</ul>
+</li>
+<li><a href="#/slide-orgc7a0a2e">Example Output</a></li>
+<li><a href="#/slide-org9180fd6">Design Philosophy</a></li>
+<li><a href="#/slide-org99e831b">Disclaimer</a></li>
+<li><a href="#/slide-org51ecc8e">Maintainer</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section>
+<section id="slide-org96e053d">
+<h2 id="org96e053d">Overview</h2>
+<p>
+<b>cerrfix</b> is a lightweight, extensible command-line tool designed to
+help users and system administrators diagnose and resolve <b>common errors
+on Linux-based systems</b>.
+</p>
+
+<p>
+It works by matching known error signatures from logs against a curated,
+human-readable knowledge base of fixes and presenting safe, actionable
+solutions.
+</p>
+
+<p>
+The tool is intentionally <b>non-intrusive</b> and <b>transparent</b>, making it
+suitable for personal machines, servers, development environments, and
+shared systems.
+</p>
+
+<p>
+&#x2014;
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org8d09ffd">
+<h2 id="org8d09ffd">Motivation</h2>
+<p>
+Linux systems frequently encounter recurring problems such as:
+</p>
+<ul>
+<li>Compiler and linker errors</li>
+<li>Missing headers and shared libraries</li>
+<li>Runtime loader failures</li>
+<li>Permission and execution issues</li>
+<li>Environment and path misconfigurations</li>
+<li>GPU, accelerator, and toolchain errors</li>
+
+</ul>
+
+<p>
+While solutions often exist, they are:
+</p>
+<ul>
+<li>Repeated across users</li>
+<li>Scattered across forums, emails, or chat logs</li>
+<li>Poorly documented or forgotten over time</li>
+
+</ul>
+
+<p>
+<b>cerrfix</b> converts this operational knowledge into a structured,
+searchable, and reusable fix repository.
+</p>
+
+<p>
+&#x2014;
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org2956dfe">
+<h2 id="org2956dfe">Key Features</h2>
+<ul>
+<li>Rule-based error detection using regex patterns</li>
+<li>YAML-based fix definitions</li>
+<li>Human-readable and auditable fixes</li>
+<li>Optional fix script generation</li>
+<li>CLI-first design (no background services)</li>
+<li>Works across diverse Linux environments</li>
+<li>Extensible fix repository without code changes</li>
+
+</ul>
+
+<p>
+&#x2014;
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org24030d7">
+<h2 id="org24030d7">Project Structure</h2>
+<div class="org-src-container">
+
+<pre class="src src-text">cerrfix/
+&#9500;&#9472;&#9472; bin/
+&#9474;   &#9492;&#9472;&#9472; cerrfix                # CLI entrypoint
+&#9500;&#9472;&#9472; cli.py                     # Main logic
+&#9500;&#9472;&#9472; core.py                    # core functions
+&#9500;&#9472;&#9472; fixes/                     # Fix definitions (YAML)
+&#9500;&#9472;&#9472; schema/                    # schema definition 
+&#9474;   &#9492;&#9472;&#9472; fix_schema.py          # schema definition file
+&#9500;&#9472;&#9472; utils/                     # path and validation
+&#9474;   &#9492;&#9472;&#9472; paths.py               # path
+&#9474;   &#9492;&#9472;&#9472; validation.py          # validation
+&#9500;&#9472;&#9472; setup-env.sh               # PATH setup script
+&#9500;&#9472;&#9472; README.org
+&#9492;&#9472;&#9472; CONTRIBUTING.org
+</pre>
+</div>
+
+<p>
+&#x2014;
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgfdde560">
+<h2 id="orgfdde560">Requirements</h2>
+<div class="outline-text-2" id="text-orgfdde560">
+</div>
+</section>
+<section id="slide-orgdf54bbf">
+<h3 id="orgdf54bbf">Runtime</h3>
+<ul>
+<li>Linux</li>
+<li>Python &gt;= 3.8</li>
+
+</ul>
+
+<p>
+&#x2014;
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org8446cc8">
+<h2 id="org8446cc8">Installation</h2>
+<div class="outline-text-2" id="text-org8446cc8">
+</div>
+</section>
+<section id="slide-org3c3d633">
+<h3 id="org3c3d633">Clone the Repository</h3>
+<div class="org-src-container">
+
+<pre class="src src-bash"><span style="color: #fabd2f;">git</span> clone https://github.com/CISSSCO/cerrfix.git
+<span style="color: #fabd2f;">cd</span> cerrfix
+</pre>
+</div>
+</section>
+<section id="slide-org8096ef7">
+<h3 id="org8096ef7">Run Installer</h3>
+<div class="org-src-container">
+
+<pre class="src src-bash">./install.sh
+</pre>
+</div>
+</section>
+<section id="slide-org243ed7c">
+<h3 id="org243ed7c">Enable CLI Access</h3>
+<div class="org-src-container">
+
+<pre class="src src-bash"><span style="color: #fe8019;">source</span> setup-env.sh
+</pre>
+</div>
+
+<p>
+After this, the <code>cerrfix</code> command will be available in your shell.
+</p>
+
+<p>
+&#x2014;
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org14de25d">
+<h2 id="org14de25d">Usage</h2>
+<div class="outline-text-2" id="text-org14de25d">
+</div>
+</section>
+<section id="slide-orgcf3000f">
+<h3 id="orgcf3000f">Diagnose an Error Log</h3>
+<div class="org-src-container">
+
+<pre class="src src-bash">cerrfix diagnose error.log
+</pre>
+</div>
+</section>
+<section id="slide-org8e6dc9c">
+<h3 id="org8e6dc9c">Add a New Fix</h3>
+<div class="org-src-container">
+
+<pre class="src src-bash">cerrfix add path/to/fix.yaml
+</pre>
+</div>
+</section>
+<section id="slide-orga8b9a58">
+<h3 id="orga8b9a58">Update an Existing Fix</h3>
+<div class="org-src-container">
+
+<pre class="src src-bash">cerrfix update path/to/fix.yaml
+</pre>
+</div>
+</section>
+<section id="slide-orge4c0862">
+<h3 id="orge4c0862">Remove a Fix</h3>
+<div class="org-src-container">
+
+<pre class="src src-bash">cerrfix remove issue_id
+</pre>
+</div>
+</section>
+<section id="slide-org5f44a56">
+<h3 id="org5f44a56">List Available Fixes</h3>
+<div class="org-src-container">
+
+<pre class="src src-bash">cerrfix list
+</pre>
+</div>
+</section>
+<section id="slide-org5d12153">
+<h3 id="org5d12153">Show Fix Details (Raw yaml)</h3>
+<div class="org-src-container">
+
+<pre class="src src-bash">cerrfix show issue_id
+</pre>
+</div>
+</section>
+<section id="slide-org9edf780">
+<h3 id="org9edf780">Search Fixes</h3>
+<div class="org-src-container">
+
+<pre class="src src-bash">cerrfix search linker
+</pre>
+</div>
+</section>
+<section id="slide-orgcf6fc6c">
+<h3 id="orgcf6fc6c">Show statistics</h3>
+<div class="org-src-container">
+
+<pre class="src src-bash">cerrfix stats
+</pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgc7a0a2e">
+<h2 id="orgc7a0a2e">Example Output</h2>
+<div class="org-src-container">
+
+<pre class="src src-text">&#9989; Issue Detected!
+Issue ID    : SHARED_LIB_NOT_FOUND_001
+Description : Shared library not found at runtime
+Category    : system
+Severity    : error
+
+&#128295; Suggested Fix:
+  $ export LD_LIBRARY_PATH=/path/to/lib:$LD_LIBRARY_PATH
+
+&#128736; Fix script generated:
+  source fix_SHARED_LIB_NOT_FOUND_001.sh
+</pre>
+</div>
+
+<p>
+&#x2014;
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org9180fd6">
+<h2 id="org9180fd6">Design Philosophy</h2>
+<ul>
+<li><b>Safety first</b>: No automatic destructive actions</li>
+<li><b>Transparency</b>: All fixes are human-readable</li>
+<li><b>Extensibility</b>: Add fixes without touching code</li>
+<li><b>Portability</b>: Avoid site-specific assumptions</li>
+
+</ul>
+
+<p>
+&#x2014;
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org99e831b">
+<h2 id="org99e831b">Disclaimer</h2>
+<p>
+cerrfix provides <b>suggested fixes</b> based on known patterns.
+Always review generated scripts before executing them.
+</p>
+
+<p>
+The authors are not responsible for unintended system changes.
+</p>
+
+<p>
+&#x2014;
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org51ecc8e">
+<h2 id="org51ecc8e">Maintainer</h2>
+<ul>
+<li>Name: Cisco Ramon</li>
+<li>Role: Creator &amp; Maintainer</li>
+<li>Focus: Linux systems, tooling, and developer productivity</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/search/search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+overview: true,
+
+transition: 'fade',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealMarkdown, RevealNotes, RevealSearch, RevealZoom ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>
