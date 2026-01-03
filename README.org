@@ -1,7 +1,7 @@
 #+TITLE: cerrfix
 #+AUTHOR: Cisco Ramon
 #+DESCRIPTION: A rule-based diagnostic and fix recommendation tool for Linux systems
-#+OPTIONS: toc:2 num:nil
+#+OPTIONS: toc:1 num:nil timestamp:nil
 #+DATE: 2026-01-03
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+REVEAL_THEME: solarized
@@ -12,13 +12,11 @@
 
 
 
-
 * Overview
 
 *cerrfix* is a lightweight, extensible command-line tool designed to
 help users and system administrators diagnose and resolve *common errors
 on Linux-based systems*.
-
 It works by matching known error signatures from logs against a curated,
 human-readable knowledge base of fixes and presenting safe, actionable
 solutions.
@@ -37,11 +35,9 @@ Linux systems frequently encounter recurring problems such as:
 - Runtime loader failures
 - Permission and execution issues
 - Environment and path misconfigurations
-- GPU, accelerator, and toolchain errors
 
 While solutions often exist, they are:
-- Repeated across users
-- Scattered across forums, emails, or chat logs
+- Repeated across users and cattered across forums, emails, or chat logs
 - Poorly documented or forgotten over time
 
 *cerrfix* converts this operational knowledge into a structured,
