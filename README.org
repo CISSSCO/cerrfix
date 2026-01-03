@@ -63,6 +63,8 @@ cerrfix/
 ├── schema/                    # schema definition 
 │   └── fix_schema.py          # schema definition file
 ├── utils/                     # path and validation
+│   └── paths.py               # path
+│   └── validation.py          # validation
 ├── setup-env.sh               # PATH setup script
 ├── README.org
 └── CONTRIBUTING.org
@@ -87,6 +89,12 @@ git clone https://github.com/CISSSCO/cerrfix.git
 cd cerrfix
 #+END_SRC
 
+** Run Installer
+
+#+BEGIN_SRC bash
+./install.sh
+#+END_SRC
+
 ** Enable CLI Access
 
 #+BEGIN_SRC bash
@@ -109,19 +117,43 @@ cerrfix diagnose error.log
 ** Add a New Fix
 
 #+BEGIN_SRC bash
-cerrfix add-fix path/to/fix.yaml
+cerrfix add path/to/fix.yaml
+#+END_SRC
+
+** Update an Existing Fix
+
+#+BEGIN_SRC bash
+cerrfix update path/to/fix.yaml
+#+END_SRC
+
+** Remove a Fix
+
+#+BEGIN_SRC bash
+cerrfix remove issue_id
 #+END_SRC
 
 ** List Available Fixes
 
 #+BEGIN_SRC bash
-cerrfix list-fixes
+cerrfix list
+#+END_SRC
+
+** Show Fix Details (Raw yaml)
+
+#+BEGIN_SRC bash
+cerrfix show issue_id
 #+END_SRC
 
 ** Search Fixes
 
 #+BEGIN_SRC bash
 cerrfix search linker
+#+END_SRC
+
+** Show statistics
+
+#+BEGIN_SRC bash
+cerrfix stats
 #+END_SRC
 
 * Example Output
