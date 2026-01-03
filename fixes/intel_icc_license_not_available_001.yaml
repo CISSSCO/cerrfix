@@ -1,0 +1,8 @@
+issue_id: INTEL_ICC_LICENSE_NOT_AVAILABLE_001
+software: intel-icc
+error_pattern: "license.*Comp-CL.*not available|connection to the license server could not be made"
+description: Intel ICC compiler license is not available or license server unreachable
+root_cause: Intel compiler license server not reachable or license environment not configured
+solution:
+  - module load intel-oneapi-compilers
+

@@ -1,0 +1,7 @@
+issue_id: GCC_C99_FOR_INITIAL_DECLARATION_001
+software: gcc
+error_pattern: "for.*initial declarations.*C99 mode"
+description: loop initial declarations are only allowed in C99 mode
+root_cause: for loop initial declarations
+solution:
+  - module load gcc
