@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CERRFIX_HOME="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+VENV_PY="$CERRFIX_HOME/.cerrfix-env/bin/python"
+
+if [[ ! -x "$VENV_PY" ]]; then
+  echo "❌ cerrfix environment not found."
+  exit 1
+fi
+
+exec "$VENV_PY" "$CERRFIX_HOME/cerrfix.py" "$@"
+

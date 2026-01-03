@@ -5,7 +5,7 @@ import yaml
 import sys
 from pathlib import Path
 
-FIX_DIR = Path("/home/abhi581b/git/fixsys/fixes")
+FIX_DIR = Path("/home/abhi581b/git/cerrfix/fixes")
 
 def load_fixes():
     fixes = []
@@ -60,7 +60,7 @@ def diagnose(logfile):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: fixsys.py <logfile>")
+        print("Usage: cerrfix.py <logfile>")
         sys.exit(1)
 
     diagnose(sys.argv[1])

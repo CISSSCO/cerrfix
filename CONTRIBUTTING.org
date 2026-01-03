@@ -1,0 +1,120 @@
+#+TITLE: Contributing to cerrfix
+#+AUTHOR: Cisco Ramon
+#+OPTIONS: toc:2 num:nil
+
+* Introduction
+
+Thank you for your interest in contributing to *cerrfix* 🎉
+
+*cerrfix* is a community-driven project aimed at capturing and
+structuring solutions to *common errors on Linux-based systems* in a
+transparent, auditable, and extensible way.
+
+Contributions are welcome in the form of:
+- New fix definitions
+- Improvements to existing fixes
+- Bug reports
+- Feature enhancements
+- Documentation improvements
+
+---
+
+* Contribution Philosophy
+
+Before contributing, please keep the following principles in mind:
+
+- *Safety over automation*: Never introduce fixes that perform
+  destructive system changes automatically.
+- *Transparency*: All fixes must be human-readable and auditable.
+- *Portability*: Avoid assumptions about a specific distribution,
+  cluster, or organization.
+- *Minimalism*: Keep fixes and logic simple and explicit.
+
+---
+
+* Ways to Contribute
+
+** Improve Existing Fixes
+
+You may:
+- Refine regex patterns
+- Improve descriptions or titles
+- Add clearer resolution steps
+- Improve verification criteria
+
+Always ensure backward compatibility and avoid breaking existing fixes.
+
+---
+
+** Report Bugs or Issues
+
+If you encounter:
+- False positives
+- Missed detections
+- Validation failures
+- CLI bugs
+
+Please open an issue with:
+- Exact command used
+- Relevant error logs (sanitized)
+- Expected vs actual behavior
+
+---
+
+* Fix Definition Guidelines
+
+When writing fix YAML files:
+
+- Use a *globally unique* `issue_id`
+- Prefer *regex patterns* that are specific but robust
+- Keep resolution steps *explicit and safe*
+- Avoid hardcoded paths or environment-specific values
+- Prefer generic solutions with clear user guidance
+
+Fixes must validate against the official schema.
+
+---
+
+* Development Setup
+
+** Requirements
+
+- Linux
+- Python >= 3.8
+- pip or conda environment
+
+** Local Setup
+
+#+BEGIN_SRC bash
+git clone <repo-url>
+cd cerrfix
+python -m venv .cerrfix-env
+source .cerrfix-env/bin/activate
+pip install pyyaml
+#+END_SRC
+
+---
+
+* Code Style & Standards
+
+- Follow the existing project structure
+- Keep functions small and readable
+- Prefer clarity over cleverness
+- Avoid introducing breaking changes without discussion
+
+---
+
+* License
+
+By contributing to this project, you agree that your contributions will
+be licensed under the *MIT License*.
+
+---
+
+* Final Notes
+
+This project is designed to grow organically through real-world usage.
+Thoughtful, experience-driven contributions are especially valued.
+
+Thank you for helping improve *cerrfix* 🚀
+
