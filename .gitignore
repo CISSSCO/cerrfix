@@ -1,1 +1,2 @@
 .cerrfix-env
+*__pycache__*

@@ -1,0 +1,31 @@
+schema_version: 1.0
+
+issue_id: OPENMP_LINKER_ERROR_001
+title: Undefined reference to OpenMP runtime functions
+
+category: parallel-programming
+subcategory: openmp
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "undefined reference to.*omp_"
+
+description: OpenMP symbols are missing during linking.
+
+root_cause:
+  summary: OpenMP linker flag missing
+  details: >
+    The OpenMP flag was not passed during linking, so the OpenMP runtime
+    library was not linked.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - gcc -fopenmp file.c
+
+verification:
+  success_criteria:
+    - Binary links successfully

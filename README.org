@@ -57,8 +57,12 @@ searchable, and reusable fix repository.
 cerrfix/
 ├── bin/
 │   └── cerrfix                # CLI entrypoint
-├── cerrfix.py                 # Main logic
+├── cli.py                     # Main logic
+├── core.py                    # core functions
 ├── fixes/                     # Fix definitions (YAML)
+├── schema/                    # schema definition 
+│   └── fix_schema.py          # schema definition file
+├── utils/                     # path and validation
 ├── setup-env.sh               # PATH setup script
 ├── README.org
 └── CONTRIBUTING.org
@@ -79,7 +83,7 @@ cerrfix/
 ** Clone the Repository
 
 #+BEGIN_SRC bash
-git clone <repo-url>
+git clone https://github.com/CISSSCO/cerrfix.git
 cd cerrfix
 #+END_SRC
 
@@ -93,12 +97,31 @@ After this, the =cerrfix= command will be available in your shell.
 
 ---
 
+
 * Usage
 
 ** Diagnose an Error Log
 
 #+BEGIN_SRC bash
-cerrfix error.log
+cerrfix diagnose error.log
+#+END_SRC
+
+** Add a New Fix
+
+#+BEGIN_SRC bash
+cerrfix add-fix path/to/fix.yaml
+#+END_SRC
+
+** List Available Fixes
+
+#+BEGIN_SRC bash
+cerrfix list-fixes
+#+END_SRC
+
+** Search Fixes
+
+#+BEGIN_SRC bash
+cerrfix search linker
 #+END_SRC
 
 * Example Output

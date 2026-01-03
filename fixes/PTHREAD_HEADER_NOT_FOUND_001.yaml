@@ -1,0 +1,31 @@
+schema_version: 1.0
+
+issue_id: PTHREAD_HEADER_NOT_FOUND_001
+title: pthread.h header file not found
+
+category: parallel-programming
+subcategory: pthread
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "pthread\\.h: No such file or directory"
+
+description: POSIX thread header is missing during compilation.
+
+root_cause:
+  summary: Incorrect compiler or missing pthread flag
+  details: >
+    pthread support exists but the required compile and link flag
+    was not used.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - gcc -pthread file.c
+
+verification:
+  success_criteria:
+    - Compilation succeeds with -pthread

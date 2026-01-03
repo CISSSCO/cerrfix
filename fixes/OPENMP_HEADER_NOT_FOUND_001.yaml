@@ -1,0 +1,31 @@
+schema_version: 1.0
+
+issue_id: OPENMP_HEADER_NOT_FOUND_001
+title: OpenMP header file omp.h not found
+
+category: parallel-programming
+subcategory: openmp
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "omp\\.h: No such file or directory"
+
+description: OpenMP header file is missing during compilation.
+
+root_cause:
+  summary: OpenMP compiler support not enabled
+  details: >
+    The compiler supports OpenMP but the OpenMP flag was not enabled,
+    so omp.h is not available.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - gcc -fopenmp file.c
+
+verification:
+  success_criteria:
+    - Compilation succeeds with -fopenmp

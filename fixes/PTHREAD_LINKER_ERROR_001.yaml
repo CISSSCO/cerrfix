@@ -1,0 +1,30 @@
+schema_version: 1.0
+
+issue_id: PTHREAD_LINKER_ERROR_001
+title: Undefined reference to pthread functions
+
+category: parallel-programming
+subcategory: pthread
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "undefined reference to.*pthread_"
+
+description: pthread symbols missing during linking.
+
+root_cause:
+  summary: pthread linker flag missing
+  details: >
+    The program was compiled without linking against the pthread library.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - gcc -pthread file.c
+
+verification:
+  success_criteria:
+    - Binary links successfully

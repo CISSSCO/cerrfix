@@ -1,0 +1,35 @@
+schema_version: 1.0
+
+issue_id: OPENMPI_MPICC_NOT_FOUND_001
+title: mpicc command not found / mpi.h missing
+
+category: parallel-programming
+subcategory: mpi
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "(mpicc: command not found|mpi\\.h: No such file or directory)"
+
+description: >
+  MPI compiler wrapper (mpicc) is not available in the environment,
+  causing MPI programs to fail compilation.
+
+root_cause:
+  summary: MPI module not loaded
+  details: >
+    The OpenMPI (or any MPI implementation) module is not loaded,
+    so mpicc is not in PATH and mpi.h headers are unavailable to gcc.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - module load openmpi/4.1.1
+
+verification:
+  success_criteria:
+    - which mpicc
+    - mpicc --version
+    - mpicc test1.c compiles successfully

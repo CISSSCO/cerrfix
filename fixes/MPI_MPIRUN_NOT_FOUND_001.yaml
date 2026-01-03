@@ -1,0 +1,32 @@
+schema_version: 1.0
+
+issue_id: MPI_MPIRUN_NOT_FOUND_001
+title: mpirun command not found
+
+category: parallel-programming
+subcategory: mpi
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "mpirun: command not found"
+
+description: MPI runtime launcher is not available.
+
+root_cause:
+  summary: MPI module not loaded
+  details: >
+    The MPI runtime environment is not loaded, so mpirun is not available
+    in PATH.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - module load openmpi/4.1.1
+
+verification:
+  success_criteria:
+    - which mpirun
+    - mpirun --version

@@ -1,8 +1,33 @@
-issue_id: INTEL_ICC_LICENSE_NOT_AVAILABLE_001
-software: intel-icc
-error_pattern: "license.*Comp-CL.*not available|connection to the license server could not be made"
-description: Intel ICC compiler license is not available or license server unreachable
-root_cause: Intel compiler license server not reachable or license environment not configured
-solution:
-  - module load intel-oneapi-compilers
+schema_version: 1.0
 
+issue_id: INTEL_ICC_LICENSE_NOT_AVAILABLE_001
+title: Intel ICC license not available
+
+category: compiler
+subcategory: intel
+severity: critical
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "license.*Comp-CL.*not available|connection to the license server could not be made"
+
+description: Intel ICC compiler license missing or unreachable
+
+root_cause:
+  summary: FlexLM license server not reachable
+  details: >
+    Intel compilers require a valid FlexLM license. This error occurs
+    when the license server is down, unreachable, or misconfigured.
+
+resolution:
+  strategy: manual
+  risk_level: medium
+
+  steps:
+    - source /home/apps/spack/share/spack/setup-env.sh
+    - spack load intel-oneapi-compilers/7nc4qpd
+
+verification:
+  success_criteria:
+    - icc --version runs without license error

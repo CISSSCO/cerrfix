@@ -1,0 +1,30 @@
+schema_version: 1.0
+
+issue_id: EXEC_PERMISSION_DENIED_001
+title: Permission denied while executing binary
+
+category: system
+subcategory: permissions
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "Permission denied"
+
+description: Executable does not have execute permission.
+
+root_cause:
+  summary: Missing execute permission
+  details: >
+    The binary file does not have execute permissions set.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - chmod +x ./a.out
+
+verification:
+  success_criteria:
+    - Binary executes successfully

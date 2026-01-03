@@ -32,8 +32,30 @@ Before contributing, please keep the following principles in mind:
 
 ---
 
+*
 * Ways to Contribute
 
+** Add a New Fix (Most Common)
+
+This is the primary way to contribute.
+
+Each fix is defined as a single YAML file that:
+- Describes a known error
+- Explains its root cause
+- Provides safe resolution steps
+
+Use the CLI to add fixes:
+
+#+BEGIN_SRC bash
+cerrfix add-fix path/to/fix.yaml
+#+END_SRC
+
+The fix will be:
+- Validated against the schema
+- Checked for duplicate issue IDs
+- Added to the fix repository if valid
+
+---
 ** Improve Existing Fixes
 
 You may:
@@ -86,11 +108,14 @@ Fixes must validate against the official schema.
 ** Local Setup
 
 #+BEGIN_SRC bash
-git clone <repo-url>
+git clone https://github.com/CISSSCO/cerrfix.git
 cd cerrfix
 python -m venv .cerrfix-env
 source .cerrfix-env/bin/activate
 pip install pyyaml
+pip install pydantic
+pip install rich
+pip install typer
 #+END_SRC
 
 ---

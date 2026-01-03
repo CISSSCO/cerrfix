@@ -1,0 +1,30 @@
+schema_version: 1.0
+
+issue_id: CUDA_NVCC_NOT_FOUND_001
+title: CUDA compiler nvcc not found
+
+category: accelerator
+subcategory: cuda
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "nvcc: command not found"
+
+description: CUDA compiler is not available.
+
+root_cause:
+  summary: CUDA module not loaded
+  details: >
+    The CUDA toolkit is not loaded, so nvcc is unavailable.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - module load cuda/12.3
+
+verification:
+  success_criteria:
+    - nvcc --version

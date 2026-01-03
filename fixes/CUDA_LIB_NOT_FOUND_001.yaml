@@ -1,0 +1,30 @@
+schema_version: 1.0
+
+issue_id: CUDA_LIB_NOT_FOUND_001
+title: CUDA runtime library not found
+
+category: accelerator
+subcategory: cuda
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "libcudart\\.so.*not found"
+
+description: CUDA runtime libraries are missing at runtime.
+
+root_cause:
+  summary: CUDA runtime not in LD_LIBRARY_PATH
+  details: >
+    CUDA libraries are not visible to the runtime linker.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - module load cuda/12.3
+
+verification:
+  success_criteria:
+    - ldd executable shows libcudart

@@ -10,5 +10,5 @@ if [[ ! -x "$VENV_PY" ]]; then
   exit 1
 fi
 
-exec "$VENV_PY" "$CERRFIX_HOME/cerrfix.py" "$@"
+exec "$VENV_PY" "$CERRFIX_HOME/cli.py" "$@"
 

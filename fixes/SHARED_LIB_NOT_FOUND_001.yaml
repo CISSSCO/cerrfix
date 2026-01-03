@@ -1,0 +1,31 @@
+schema_version: 1.0
+
+issue_id: SHARED_LIB_NOT_FOUND_001
+title: Shared library not found at runtime
+
+category: system
+subcategory: runtime-linker
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "error while loading shared libraries"
+
+description: Runtime linker cannot locate required shared libraries.
+
+root_cause:
+  summary: LD_LIBRARY_PATH not set
+  details: >
+    The required shared library paths are not included in
+    LD_LIBRARY_PATH.
+
+resolution:
+  strategy: manual
+  risk_level: medium
+  steps:
+    - export LD_LIBRARY_PATH=/path/to/lib:$LD_LIBRARY_PATH
+
+verification:
+  success_criteria:
+    - ldd executable resolves all libraries
