@@ -25,7 +25,7 @@ resolution:
   risk_level: low
 
   steps:
-    - module load gcc
+    - module load gnu8/8.3.0
     # OR
     # - gcc -std=c99 test.c
 

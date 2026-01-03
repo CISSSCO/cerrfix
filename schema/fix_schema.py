@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import List, Literal
+from typing import Optional, Dict
 
 class ErrorSignature(BaseModel):
     type: Literal["regex", "string"]
@@ -33,7 +34,7 @@ class Fix(BaseModel):
 
     severity: Literal["info", "warning", "error", "critical"]
     confidence: Literal["low", "medium", "high"]
-
+    scope: Optional[Dict[str, str]] = None
     error_signature: ErrorSignature
 
     description: str

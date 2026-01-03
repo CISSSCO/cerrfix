@@ -7,6 +7,7 @@ VENV_PY="$CERRFIX_HOME/.cerrfix-env/bin/python"
 
 if [[ ! -x "$VENV_PY" ]]; then
   echo "❌ cerrfix environment not found."
+  echo "➡️  Run: ./install.sh"
   exit 1
 fi
 

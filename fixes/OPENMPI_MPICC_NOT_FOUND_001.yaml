@@ -8,6 +8,11 @@ subcategory: mpi
 severity: error
 confidence: high
 
+scope:
+  machine: generic
+  environment: linux
+  os: ubuntu
+
 error_signature:
   type: regex
   pattern: "(mpicc: command not found|mpi\\.h: No such file or directory)"
