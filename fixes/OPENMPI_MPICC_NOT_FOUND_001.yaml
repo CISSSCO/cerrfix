@@ -11,7 +11,7 @@ confidence: high
 scope:
   machine: generic
   environment: linux
-  os: ubuntu
+  os: centos
 
 error_signature:
   type: regex
@@ -31,6 +31,7 @@ resolution:
   strategy: manual
   risk_level: low
   steps:
+    - "# Load openmpi module"
     - module load openmpi/4.1.1
 
 verification:

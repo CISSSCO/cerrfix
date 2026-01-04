@@ -1,0 +1,41 @@
+schema_version: 1.0
+
+issue_id: LIBSTDCPP_NOT_FOUND_001
+title: libstdc++ shared library not found
+
+category: runtime
+subcategory: libraries
+severity: error
+confidence: medium
+
+error_signature:
+  type: regex
+  pattern: "(libstdc\\+\\+\\.so.*cannot open shared object file)"
+
+description: C++ runtime library is missing.
+
+root_cause:
+  summary: Missing C++ runtime libraries
+  details: >
+    The application depends on libstdc++ which is not available at runtime.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Check missing libraries"
+    - "ldd ./a.out"
+
+    - "# Install C++ runtime libraries"
+    - "sudo apt install libstdc++6"
+
+    - "# On HPC systems, load GCC runtime module"
+    - "module load gcc"
+
+    - "# Re-run application"
+    - "./a.out"
+
+verification:
+  success_criteria:
+    - Program runs without shared library error
+

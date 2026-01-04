@@ -1,0 +1,34 @@
+schema_version: 1.0
+issue_id: GLIBC_VERSION_MISMATCH_001
+title: GLIBC version mismatch error
+category: runtime
+subcategory: libc
+severity: critical
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "GLIBC_[0-9\\.]+ not found"
+
+description: >
+  Binary requires a newer GLIBC version than available on the system.
+
+root_cause:
+  summary: Incompatible GLIBC version
+  details: >
+    The binary was compiled on a system with a newer GLIBC version than
+    the runtime system provides.
+
+resolution:
+  strategy: manual
+  risk_level: high
+  steps:
+    - ldd --version
+    - strings binary | grep GLIBC
+    - module load gcc
+    - recompile the application on the target system
+
+verification:
+  success_criteria:
+    - Program runs without GLIBC errors
+

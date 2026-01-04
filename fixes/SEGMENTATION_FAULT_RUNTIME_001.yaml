@@ -1,0 +1,33 @@
+schema_version: 1.0
+issue_id: SEGMENTATION_FAULT_RUNTIME_001
+title: Segmentation fault at runtime
+category: runtime
+subcategory: memory
+severity: critical
+confidence: medium
+
+error_signature:
+  type: regex
+  pattern: "Segmentation fault"
+
+description: >
+  Program accessed invalid memory location.
+
+root_cause:
+  summary: Invalid memory access
+  details: >
+    Possible causes include null pointer dereference, buffer overflow,
+    or use-after-free.
+
+resolution:
+  strategy: manual
+  risk_level: high
+  steps:
+    - compile with -g -O0
+    - run under gdb
+    - check array bounds and pointer usage
+
+verification:
+  success_criteria:
+    - Program completes execution without segmentation fault
+

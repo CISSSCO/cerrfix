@@ -1,0 +1,33 @@
+schema_version: 1.0
+issue_id: CMAKE_NOT_FOUND_001
+title: CMake command not found
+category: build
+subcategory: cmake
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "cmake: command not found"
+
+description: >
+  CMake is required but not installed or not in PATH.
+
+root_cause:
+  summary: Missing CMake installation
+  details: >
+    The build system depends on CMake, which is not available in the environment.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "#install cmake"
+    - sudo apt install cmake
+    - module load cmake
+    - cmake --version
+
+verification:
+  success_criteria:
+    - cmake command executes successfully
+

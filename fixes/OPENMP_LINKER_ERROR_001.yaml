@@ -24,6 +24,7 @@ resolution:
   strategy: manual
   risk_level: low
   steps:
+    - "# add -fopenmp to compile openmp codes"
     - gcc -fopenmp file.c
 
 verification:

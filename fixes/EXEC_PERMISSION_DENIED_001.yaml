@@ -23,8 +23,14 @@ resolution:
   strategy: manual
   risk_level: low
   steps:
-    - chmod +x ./a.out
+    - "# Check file permissions"
+    - "ls -l ./a.out"
 
+    - "# Add execute permission"
+    - "chmod +x ./a.out"
+
+    - "# Run the binary again"
+    - "./a.out"
 verification:
   success_criteria:
     - Binary executes successfully

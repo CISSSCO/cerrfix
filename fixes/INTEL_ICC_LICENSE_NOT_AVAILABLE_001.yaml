@@ -20,8 +20,9 @@ resolution:
   strategy: manual
   risk_level: medium
   steps:
-  - "#module load test"
-  - spack load intel-oneapi-compilers/7nc4qpd
+  - "#module load intel"
+  - module load intel-oneapi-compilers
+
 verification:
   success_criteria:
   - icc --version runs without license error

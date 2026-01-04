@@ -1,0 +1,32 @@
+schema_version: 1.0
+issue_id: LD_LIBRARY_PATH_EMPTY_001
+title: LD_LIBRARY_PATH not set
+category: runtime
+subcategory: environment
+severity: warning
+confidence: medium
+
+error_signature:
+  type: regex
+  pattern: "error while loading shared libraries"
+
+description: >
+  Dynamic linker cannot locate shared libraries.
+
+root_cause:
+  summary: Missing LD_LIBRARY_PATH
+  details: >
+    Required shared library directories are not present in LD_LIBRARY_PATH.
+
+resolution:
+  strategy: manual
+  risk_level: medium
+  steps:
+    - "# Add library path to LD_LIBRARY_PATH"
+    - export LD_LIBRARY_PATH=/path/to/lib:$LD_LIBRARY_PATH
+    - echo $LD_LIBRARY_PATH
+
+verification:
+  success_criteria:
+    - Application starts without shared library errors
+

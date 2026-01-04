@@ -1,0 +1,32 @@
+schema_version: 1.0
+issue_id: FORTRAN_COMPILER_NOT_FOUND_001
+title: Fortran compiler not found
+category: compiler
+subcategory: fortran
+severity: error
+confidence: high
+
+error_signature:
+  type: regex
+  pattern: "No Fortran compiler found"
+
+description: >
+  A Fortran compiler is required for building the project.
+
+root_cause:
+  summary: Missing Fortran compiler
+  details: >
+    gfortran or equivalent compiler is not installed or not loaded.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - sudo apt install gfortran
+    - module load gcc
+    - gfortran --version
+
+verification:
+  success_criteria:
+    - gfortran is detected by build system
+

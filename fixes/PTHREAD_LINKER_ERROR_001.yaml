@@ -23,6 +23,7 @@ resolution:
   strategy: manual
   risk_level: low
   steps:
+    - "# add -lpthread or -pthread to compile pthread code"
     - gcc -pthread file.c
 
 verification:

@@ -24,6 +24,7 @@ resolution:
   strategy: manual
   risk_level: medium
   steps:
+    - "# make sure the path to the library is available during echo $LD_LIBRARY_PATH"
     - export LD_LIBRARY_PATH=/path/to/lib:$LD_LIBRARY_PATH
 
 verification:

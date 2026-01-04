@@ -25,7 +25,8 @@ resolution:
   risk_level: low
 
   steps:
-    - module load gnu8/8.3.0
+    - "# add -std=c99 to your compilation"
+    - gcc -std=c99 test.c
     # OR
     # - gcc -std=c99 test.c
 
