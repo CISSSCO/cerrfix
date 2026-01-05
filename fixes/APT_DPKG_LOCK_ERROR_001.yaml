@@ -1,0 +1,50 @@
+schema_version: 1.0
+
+issue_id: APT_DPKG_LOCK_ERROR_001
+title: apt update / upgrade fails due to dpkg lock or interrupted state
+
+category: package-management
+subcategory: apt
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: ubuntu
+
+error_signature:
+  type: regex
+  pattern: "(Could not get lock /var/lib/dpkg/lock|dpkg was interrupted|Unable to acquire the dpkg frontend lock)"
+
+description: >
+  apt update or apt upgrade fails because dpkg is locked or was interrupted
+  by a previous package management operation.
+
+root_cause:
+  summary: Stale dpkg lock or interrupted apt process
+  details: >
+    Another apt/dpkg process may still be running or was terminated
+    unexpectedly, leaving the package database in an inconsistent state.
+
+resolution:
+  strategy: manual
+  risk_level: medium
+  steps:
+    - "# Check if any apt or dpkg process is running"
+    - ps aux | grep -E "apt|dpkg"
+
+    - "# Remove stale dpkg lock only if no apt process is running"
+    - sudo rm -f /var/lib/dpkg/lock
+
+    - "# Reconfigure partially installed packages"
+    - sudo dpkg --configure -a
+
+    - "# Update package lists again"
+    - sudo apt update
+
+verification:
+  success_criteria:
+    - apt update runs without errors
+    - dpkg --audit shows no issues
+

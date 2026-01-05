@@ -1,0 +1,46 @@
+schema_version: 1.0
+
+issue_id: PYTHON_COMMAND_NOT_FOUND_001
+title: python command not found
+
+category: programming
+subcategory: python
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "python: command not found"
+
+description: >
+  The python command is not available in the PATH.
+
+root_cause:
+  summary: python binary not linked
+  details: >
+    Modern Linux systems ship python3 instead of python.
+    The python command may not exist by default.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Check if python3 is available"
+    - python3 --version
+
+    - "# Create a user-level alias for python"
+    - echo "alias python=python3" >> ~/.bashrc
+
+    - "# Reload shell configuration"
+    - source ~/.bashrc
+
+verification:
+  success_criteria:
+    - python --version
+    - which python
+

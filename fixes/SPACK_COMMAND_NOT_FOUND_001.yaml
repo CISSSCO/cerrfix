@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: SPACK_COMMAND_NOT_FOUND_001
+title: spack command not found
+
+category: package-management
+subcategory: spack
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "spack: command not found"
+
+description: >
+  Spack package manager is not available in the environment.
+
+root_cause:
+  summary: Spack environment not sourced
+  details: >
+    Spack requires sourcing its setup script to be available in PATH.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Locate spack installation directory"
+    - ls /opt/spack /usr/share/spack
+
+    - "# Source spack environment setup"
+    - source /path/to/spack/share/spack/setup-env.sh
+
+verification:
+  success_criteria:
+    - spack --version
+    - which spack
+

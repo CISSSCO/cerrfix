@@ -1,0 +1,39 @@
+schema_version: 1.0
+
+issue_id: GIT_NO_UPSTREAM_BRANCH_001
+title: git push fails due to missing upstream branch
+
+category: version-control
+subcategory: git
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "has no upstream branch"
+
+description: >
+  git push fails because the current branch has no upstream branch configured.
+
+root_cause:
+  summary: Upstream branch not set
+  details: >
+    Git does not know which remote branch to push to.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Set upstream branch for current branch"
+    - git push --set-upstream origin $(git branch --show-current)
+
+verification:
+  success_criteria:
+    - git branch -vv
+    - git push works without error
+

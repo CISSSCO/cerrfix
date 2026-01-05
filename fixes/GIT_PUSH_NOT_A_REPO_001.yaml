@@ -1,0 +1,46 @@
+schema_version: 1.0
+
+issue_id: GIT_PUSH_NOT_A_REPO_001
+title: git push fails because directory is not a git repository
+
+category: version-control
+subcategory: git
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "(fatal: not a git repository|fatal: not a git repository \\(or any of the parent directories\\))"
+
+description: >
+  git push fails because the current directory is not initialized
+  as a git repository.
+
+root_cause:
+  summary: Git repository not initialized
+  details: >
+    The directory does not contain a .git folder.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Check if current directory is a git repository"
+    - ls -a | grep .git
+
+    - "# Initialize git repository if missing"
+    - git init
+
+    - "# Add remote repository"
+    - git remote add origin <repository-url>
+
+verification:
+  success_criteria:
+    - git status
+    - git remote -v
+

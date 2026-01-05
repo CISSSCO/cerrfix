@@ -1,0 +1,43 @@
+schema_version: 1.0
+
+issue_id: GIT_COMMAND_NOT_FOUND_001
+title: git command not found
+
+category: version-control
+subcategory: git
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "git: command not found"
+
+description: >
+  Git is not available in the user's PATH.
+
+root_cause:
+  summary: Git not installed or module not loaded
+  details: >
+    Git may not be installed on the system or may be provided
+    via environment modules.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Check if git is available via environment modules"
+    - module avail git
+
+    - "# Load git module if available"
+    - module load git
+
+verification:
+  success_criteria:
+    - git --version
+    - which git
+

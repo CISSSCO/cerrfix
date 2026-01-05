@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: GFORTRAN_COMMAND_NOT_FOUND_001
+title: gfortran compiler not found
+
+category: programming
+subcategory: fortran
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "gfortran: command not found"
+
+description: >
+  The GNU Fortran compiler is not available.
+
+root_cause:
+  summary: Fortran compiler not loaded
+  details: >
+    gfortran is usually bundled with gcc modules on HPC systems.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# List available gcc modules"
+    - module avail gcc
+
+    - "# Load gcc module that includes gfortran"
+    - module load gcc
+
+verification:
+  success_criteria:
+    - gfortran --version
+    - which gfortran
+

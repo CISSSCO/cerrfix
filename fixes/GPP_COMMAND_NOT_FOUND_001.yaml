@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: GPP_COMMAND_NOT_FOUND_001
+title: g++ compiler not found
+
+category: programming
+subcategory: compiler
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "g\\+\\+: command not found"
+
+description: >
+  The GNU C++ compiler (g++) is not available.
+
+root_cause:
+  summary: Compiler module not loaded
+  details: >
+    On HPC systems, compilers are usually provided via modules.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# List available compiler modules"
+    - module avail gcc
+
+    - "# Load gcc module"
+    - module load gcc
+
+verification:
+  success_criteria:
+    - g++ --version
+    - which g++
+
