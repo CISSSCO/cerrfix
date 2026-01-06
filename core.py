@@ -38,13 +38,15 @@ def diagnose_log(logfile: Path):
         pattern = fix["error_signature"]["pattern"]
 
         try:
-            if re.search(pattern, log, re.IGNORECASE):
-                return fix
+            compiled = re.compile(pattern, re.IGNORECASE)
         except re.error as e:
-            raise RuntimeError(
-                f"Invalid regex in {fix['issue_id']}: {e}"
+            console.print(
+                f"[red]⚠ Invalid regex in {fix['issue_id']}:[/red] {e}"
             )
+            continue
 
+        if compiled.search(log):
+            return fix
     return None
 
 

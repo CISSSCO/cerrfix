@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: MAKE_TARGET_NOT_SPECIFIED_001
+title: make target not specified / no default target
+
+category: build
+subcategory: make
+severity: error
+confidence: medium
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "(Makefile:.*: *** No targets specified and no makefile found)"
+
+description: >
+  Make cannot find a default target in the Makefile.
+
+root_cause:
+  summary: Missing default rule in Makefile
+  details: >
+    A Makefile needs a default target (first rule) to run without a
+    specific target.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Inspect Makefile contents"
+    - "sed -n '1,50p' Makefile"
+
+    - "# Add a default target if missing"
+    - "# e.g. all:"
+
+verification:
+  success_criteria:
+    - make help
+

@@ -1,0 +1,45 @@
+schema_version: 1.0
+
+issue_id: CPP_HEADER_NOT_FOUND_001
+title: C++ header file not found
+
+category: programming
+subcategory: cpp
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "fatal error: .*\\.hpp: No such file or directory"
+
+description: >
+  Compilation fails because a required C++ header file is missing.
+
+root_cause:
+  summary: Missing include path
+  details: >
+    The compiler cannot locate header files because the include path
+    is not specified or incorrect.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Locate the header file"
+    - "find . -name '*.hpp'"
+
+    - "# Add include directory during compilation"
+    - "g++ -I/path/to/include main.cpp -o app"
+
+    - "# Verify include paths in Makefile or build system"
+    - "# Check CXXFLAGS for -I options"
+
+verification:
+  success_criteria:
+    - compilation completes without header errors
+

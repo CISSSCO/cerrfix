@@ -1,0 +1,44 @@
+schema_version: 1.0
+
+issue_id: CPP_ABI_MISMATCH_001
+title: C++ ABI mismatch between compiled objects
+
+category: programming
+subcategory: cpp
+severity: critical
+confidence: medium
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "undefined reference to `__cxx11"
+
+description: >
+  Linker errors due to mismatched C++ ABI versions.
+
+root_cause:
+  summary: ABI mismatch
+  details: >
+    Objects were compiled using different compiler versions or ABI settings.
+
+resolution:
+  strategy: manual
+  risk_level: high
+  steps:
+    - "# Check compiler versions"
+    - "g++ --version"
+
+    - "# Recompile all objects with same compiler and ABI"
+    - "make clean && make"
+
+    - "# Ensure consistent _GLIBCXX_USE_CXX11_ABI setting"
+    - "# Example: -D_GLIBCXX_USE_CXX11_ABI=1"
+
+verification:
+  success_criteria:
+    - application links successfully
+

@@ -1,0 +1,56 @@
+schema_version: 1.0
+
+issue_id: YAML_MAPPING_VALUE_ERROR_001
+title: "Invalid YAML mapping: colon (:) used without quoting"
+
+category: configuration
+subcategory: yaml
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "mapping values are not allowed here"
+
+description: >
+  YAML parsing fails because a colon (:) is used inside a value
+  without proper quoting, causing the parser to interpret it as
+  a new key-value separator.
+
+root_cause:
+  summary: "Unquoted colon in YAML value"
+  details: >
+    In YAML, the colon character (:) is reserved for defining
+    key-value mappings. When a colon appears inside a value
+    without quotes, the YAML parser throws a ScannerError.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Identify the line mentioned in the error message"
+    - "# Example: line 25, column 24"
+
+    - "# Quote any value containing a colon (:)"
+    - "# Example:"
+    - "# summary: \"Missing std:: namespace\""
+
+    - "# Alternatively, use block scalar syntax"
+    - "# Example:"
+    - "# summary: >"
+    - "#   Missing std:: namespace"
+
+    - "# Avoid leaving trailing colons in unquoted values"
+    - "# Incorrect: summary: Missing std:"
+    - "# Correct  : summary: \"Missing std:\""
+
+verification:
+  success_criteria:
+    - YAML file loads successfully with yaml.safe_load
+    - cerrfix add-fix or update-fix completes without error
+

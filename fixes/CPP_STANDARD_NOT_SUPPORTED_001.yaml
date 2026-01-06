@@ -1,0 +1,45 @@
+schema_version: 1.0
+
+issue_id: CPP_STANDARD_NOT_SUPPORTED_001
+title: C++ standard not supported or not specified
+
+category: programming
+subcategory: cpp
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "(ISO C\\+\\+.*does not support|requires -std=)"
+
+description: >
+  Compilation fails because required C++ standard is not enabled.
+
+root_cause:
+  summary: Missing -std flag
+  details: >
+    Modern C++ features require specifying the appropriate standard
+    (e.g., C++11, C++17, C++20).
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Identify required C++ standard from error message"
+    - "# Example: C++17 required"
+
+    - "# Compile with explicit C++ standard flag"
+    - "g++ -std=c++17 main.cpp -o app"
+
+    - "# Update Makefile or build system to include -std flag"
+    - "# Example: CXXFLAGS += -std=c++17"
+
+verification:
+  success_criteria:
+    - program compiles successfully
+

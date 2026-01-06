@@ -1,0 +1,46 @@
+schema_version: 1.0
+
+issue_id: CPP_NAMESPACE_NOT_DECLARED_001
+title: "Standard C++ symbol used without std:: namespace"
+
+category: programming
+subcategory: cpp
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "was not declared in this scope; did you mean ‘std::"
+
+description: >
+  A C++ standard library symbol is used without qualifying it
+  with the std:: namespace.
+
+root_cause:
+  summary: "Missing std:: namespace qualification"
+  details: >
+    Standard library symbols such as cout, endl, vector, or string
+    must be prefixed with std:: unless using-directives are applied.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Ensure the appropriate standard header is included"
+    - "# Example: #include <iostream>"
+
+    - "# Prefix standard symbols with std::"
+    - "# Example: std::cout << \"Hello\" << std::endl;"
+
+    - "# Alternatively, use using-directive (not recommended in headers)"
+    - "# using namespace std;"
+
+verification:
+  success_criteria:
+    - compilation succeeds
+

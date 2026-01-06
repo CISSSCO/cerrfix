@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: CPP_COUT_NOT_DECLARED_001
+title: "cout not declared in this scope"
+
+category: programming
+subcategory: cpp
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "cout.*not declared in this scope"
+
+description: >
+  The C++ standard output stream cout is used without proper qualification.
+
+root_cause:
+  summary: "Missing std:: namespace or iostream include"
+  details: >
+    cout belongs to the std namespace and requires <iostream>
+    to be included.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Ensure iostream header is included"
+    - "# Add: #include <iostream>"
+
+    - "# Use std::cout instead of cout"
+    - "# Example: std::cout << \"Hello\";"
+
+verification:
+  success_criteria:
+    - compilation succeeds
+

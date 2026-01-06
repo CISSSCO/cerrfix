@@ -1,0 +1,45 @@
+schema_version: 1.0
+
+issue_id: CPP_MULTIPLE_DEFINITION_001
+title: Multiple definition of symbols during linking
+
+category: programming
+subcategory: cpp
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "multiple definition of"
+
+description: >
+  Linker reports multiple definitions of the same symbol.
+
+root_cause:
+  summary: Function or variable defined multiple times
+  details: >
+    This often occurs when functions are defined in header files
+    without using inline or include guards.
+
+resolution:
+  strategy: manual
+  risk_level: medium
+  steps:
+    - "# Check headers for function definitions"
+    - "grep -R \"{\" include/"
+
+    - "# Move function definitions to source (.cpp) files"
+    - "# Keep only declarations in headers"
+
+    - "# Use include guards or #pragma once in headers"
+    - "# Example: #ifndef HEADER_H"
+
+verification:
+  success_criteria:
+    - linking completes without multiple definition errors
+

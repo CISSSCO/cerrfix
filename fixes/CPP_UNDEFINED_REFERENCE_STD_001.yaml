@@ -1,0 +1,46 @@
+schema_version: 1.0
+
+issue_id: CPP_UNDEFINED_REFERENCE_STD_001
+title: "Undefined reference to std:: symbols during linking"
+
+category: programming
+subcategory: cpp
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "undefined reference to `std::"
+
+description: >
+  Linking fails with undefined reference errors for C++ standard library symbols.
+
+root_cause:
+  summary: C++ standard library not linked
+  details: >
+    The program was compiled or linked using gcc instead of g++,
+    or the C++ standard library was not linked explicitly.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Check how the program was compiled"
+    - "grep -n gcc build.log"
+
+    - "# Recompile using g++ instead of gcc"
+    - "g++ main.cpp -o app"
+
+    - "# If linking manually, explicitly link stdc++"
+    - "gcc main.o -lstdc++ -o app"
+
+verification:
+  success_criteria:
+    - application links successfully
+    - "no undefined reference to std::"
+

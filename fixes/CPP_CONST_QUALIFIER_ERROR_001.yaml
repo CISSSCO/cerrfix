@@ -1,0 +1,41 @@
+schema_version: 1.0
+
+issue_id: CPP_CONST_QUALIFIER_ERROR_001
+title: Passing const object to non-const method
+
+category: programming
+subcategory: cpp
+severity: error
+confidence: medium
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "passing 'const .*' as 'this' argument discards qualifiers"
+
+description: >
+  Compiler error caused by calling non-const method on const object.
+
+root_cause:
+  summary: Missing const qualifier
+  details: >
+    Member function should be marked const if it does not modify object state.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Identify method causing the error"
+    - "grep -n \"const .*\" src/*.cpp"
+
+    - "# Add const qualifier to method declaration"
+    - "# Example: int get() const;"
+
+verification:
+  success_criteria:
+    - code compiles without const-related errors
+

@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: CPP_VIRTUAL_DESTRUCTOR_WARNING_001
+title: Deleting object with non-virtual destructor warning
+
+category: programming
+subcategory: cpp
+severity: warning
+confidence: medium
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "delete called on non-virtual destructor"
+
+description: >
+  Compiler warns about deleting derived objects through base class pointer.
+
+root_cause:
+  summary: Base class destructor not virtual
+  details: >
+    When polymorphism is used, base class destructors should be virtual
+    to ensure proper cleanup.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Locate base class definition"
+    - "grep -R \"class .*\" src/"
+
+    - "# Declare destructor as virtual in base class"
+    - "# Example: virtual ~Base() {}"
+
+verification:
+  success_criteria:
+    - warning no longer appears
+
