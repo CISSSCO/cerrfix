@@ -1,0 +1,41 @@
+schema_version: 1.0
+
+issue_id: LIBPNG_NOT_FOUND_001
+title: libpng development files not found
+
+category: development
+subcategory: libraries
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "(png.h: No such file or directory)"
+
+description: >
+  Development headers for libpng are missing, preventing compilation.
+
+root_cause:
+  summary: Missing libpng-dev
+  details: >
+    Many graphics or image processing builds require libpng headers.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Try loading a module if available"
+    - "module avail libpng"
+
+    - "# Install via distro package manager"
+    - "# sudo apt install libpng-dev"
+
+verification:
+  success_criteria:
+    - ls /usr/include/png.h
+

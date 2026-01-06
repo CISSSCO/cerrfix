@@ -1,0 +1,45 @@
+schema_version: 1.0
+
+issue_id: MAKE_SYNTAX_ERROR_001
+title: syntax error in Makefile
+
+category: build
+subcategory: make
+severity: error
+confidence: medium
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "(Makefile:[0-9]+:.*error:.*)"
+
+description: >
+  A syntax error in a Makefile causes make to stop.
+
+root_cause:
+  summary: Invalid syntax in Makefile
+  details: >
+    The Makefile may have incorrect indentation, missing semicolons,
+    or misformatted rules.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Show line with error"
+    - "grep -n '' Makefile"
+
+    - "# Open Makefile in editor"
+    - "# vi Makefile  # or use your preferred editor"
+
+    - "# Inspect indentation (Tabs expected for recipes)"
+    - "# Ensure variables and rules are correct"
+
+verification:
+  success_criteria:
+    - make
+

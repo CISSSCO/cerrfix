@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: MAKE_WARNING_UNUSED_VARIABLE_001
+title: make warning about unused variables
+
+category: build
+subcategory: make
+severity: warning
+confidence: medium
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "(warning: unused variable)"
+
+description: >
+  A variable in a Makefile is declared but not used.
+
+root_cause:
+  summary: Unused variable
+  details: >
+    Warnings about unused variables can be safely reviewed and ignored
+    or fixed.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Inspect variable definitions"
+    - "grep -n unused Makefile"
+
+    - "# Remove or fix unused variables"
+    - "# Edit Makefile to remove unnecessary definitions"
+
+verification:
+  success_criteria:
+    - warnings are addressed
+

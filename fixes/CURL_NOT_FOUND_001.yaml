@@ -1,0 +1,46 @@
+schema_version: 1.0
+
+issue_id: CURL_NOT_FOUND_001
+title: curl command not found
+
+category: networking
+subcategory: tools
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "(curl: command not found)"
+
+description: >
+  The curl networking tool is required for many scripts and is not installed.
+
+root_cause:
+  summary: curl not installed
+  details: >
+    curl is not installed in the current PATH or environment.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Try loading curl module if available"
+    - "module avail curl"
+    - "module load curl"
+
+    - "# Confirm curl is unavailable"
+    - "curl --version"
+
+    - "# Suggest installing curl (check doc for your distro)"
+    - "# Example for Debian/Ubuntu:"
+    - "# sudo apt install curl"
+
+verification:
+  success_criteria:
+    - which curl
+

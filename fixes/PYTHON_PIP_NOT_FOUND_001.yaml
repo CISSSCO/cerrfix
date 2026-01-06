@@ -1,0 +1,44 @@
+schema_version: 1.0
+
+issue_id: PYTHON_PIP_NOT_FOUND_001
+title: pip not found for Python3 environment
+
+category: programming
+subcategory: python
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "(pip3: command not found|pip: command not found)"
+
+description: >
+  Python package installer (pip) is required but not found.
+
+root_cause:
+  summary: pip not installed or not available in PATH
+  details: >
+    Python may be installed, but pip module is not available.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Confirm Python3 availability"
+    - "python3 --version"
+
+    - "# Install pip via ensurepip"
+    - "python3 -m ensurepip --upgrade"
+
+    - "# Alternatively install via OS package manager"
+    - "# sudo apt install python3-pip"
+
+verification:
+  success_criteria:
+    - pip3 --version
+

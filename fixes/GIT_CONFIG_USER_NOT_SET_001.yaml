@@ -1,0 +1,48 @@
+schema_version: 1.0
+
+issue_id: GIT_CONFIG_USER_NOT_SET_001
+title: Git user.name or user.email not configured
+
+category: version-control
+subcategory: git
+severity: warning
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "(user\\.name|user\\.email) not set"
+
+description: >
+  Git warnings/errors about missing global config parameters for user identity.
+
+root_cause:
+  summary: Git global user identity not set
+  details: >
+    Git requires global `user.name` and `user.email` settings for commits.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Show current config"
+    - "git config --global --list"
+
+    - "# Set git global user name"
+    - "git config --global user.name 'Your Name'"
+
+    - "# Set git global user email"
+    - "git config --global user.email 'you@example.com'"
+
+    - "# Verify settings"
+    - "git config --global --list"
+
+verification:
+  success_criteria:
+    - git config user.name
+    - git config user.email
+

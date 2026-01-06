@@ -1,0 +1,38 @@
+schema_version: 1.0
+
+issue_id: GIT_BRANCH_UNTRACKED_001
+title: Git branch has no upstream tracking branch
+
+category: version-control
+subcategory: git
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "(fatal: The current branch .* has no upstream branch)"
+
+description: >
+  Pushing or pulling errors indicate the local branch lacks an upstream.
+
+root_cause:
+  summary: Upstream branch not configured
+  details: >
+    A local branch needs a remote tracking branch to perform push/pull.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Set upstream branch when pushing"
+    - "git push --set-upstream origin $(git branch --show-current)"
+
+verification:
+  success_criteria:
+    - git branch -vv
+
