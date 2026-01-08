@@ -1,0 +1,41 @@
+schema_version: 1.0
+
+issue_id: PYTHON_NAME_ERROR_001
+title: "NameError: variable not defined"
+
+category: programming
+subcategory: python
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "NameError: name .* is not defined"
+
+description: >
+  Python tried to use a variable or function that was never defined.
+
+root_cause:
+  summary: Undefined identifier
+  details: >
+    The variable may be misspelled or used before assignment.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Verify the variable name spelling"
+    - "# Ensure the variable is defined before use"
+
+    - "# Example:"
+    - "# x = 5"
+
+verification:
+  success_criteria:
+    - program executes without NameError
+

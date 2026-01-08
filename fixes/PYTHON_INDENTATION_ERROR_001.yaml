@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: PYTHON_INDENTATION_ERROR_001
+title: "IndentationError in Python code"
+
+category: programming
+subcategory: python
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "IndentationError"
+
+description: >
+  Python code has inconsistent or incorrect indentation.
+
+root_cause:
+  summary: Improper indentation
+  details: >
+    Python uses indentation to define code blocks. Mixing tabs and spaces
+    or incorrect indentation causes syntax errors.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Use consistent indentation (recommended: 4 spaces)"
+    - "# Avoid mixing tabs and spaces"
+
+    - "# Reformat the code using an editor or formatter"
+    - "python -m py_compile file.py"
+
+verification:
+  success_criteria:
+    - code compiles successfully
+

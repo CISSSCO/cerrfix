@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: PYTHON_SYNTAX_ERROR_001
+title: "Invalid Python syntax"
+
+category: programming
+subcategory: python
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "SyntaxError"
+
+description: >
+  Python encountered invalid syntax while parsing the code.
+
+root_cause:
+  summary: Syntax mistake
+  details: >
+    Common causes include missing colons, unmatched brackets,
+    or incorrect keywords.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Review the line indicated in the error message"
+    - "# Check for missing colons, parentheses, or quotes"
+
+    - "# Use python compiler to validate"
+    - "python -m py_compile file.py"
+
+verification:
+  success_criteria:
+    - code executes without syntax errors
+

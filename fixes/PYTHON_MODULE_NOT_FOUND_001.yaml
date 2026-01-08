@@ -1,0 +1,44 @@
+schema_version: 1.0
+
+issue_id: PYTHON_MODULE_NOT_FOUND_001
+title: "Python module not found"
+
+category: programming
+subcategory: python
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "ModuleNotFoundError: No module named"
+
+description: >
+  Python failed to import a required module.
+
+root_cause:
+  summary: Missing Python dependency
+  details: >
+    The required Python package is not installed in the active environment.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Identify the missing module from the error message"
+    - "# Example: No module named 'numpy'"
+
+    - "# Install the module using pip"
+    - "pip install <module_name>"
+
+    - "# If using virtual environment, activate it first"
+    - "# source venv/bin/activate"
+
+verification:
+  success_criteria:
+    - python script runs without import error
+
