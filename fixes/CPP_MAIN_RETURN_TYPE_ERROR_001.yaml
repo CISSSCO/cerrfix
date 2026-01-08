@@ -1,0 +1,54 @@
+schema_version: 1.0
+
+issue_id: CPP_MAIN_RETURN_TYPE_ERROR_001
+title: "main function has invalid return type"
+
+category: programming
+subcategory: cpp
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "main.*must return.*int"
+
+description: >
+  Compilation fails because the main function is declared
+  with an invalid return type. In C++, main must always
+  return an int.
+
+root_cause:
+  summary: "Incorrect main function signature"
+  details: >
+    The C++ standard requires the main function to return
+    an int. Using void main(), long main(), or other return
+    types results in compilation errors or undefined behavior.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Locate the main function definition"
+    - "# Incorrect examples:"
+    - "# void main()"
+    - "# long main()"
+
+    - "# Correct the return type to int"
+    - "# Example:"
+    - "int main() {"
+
+    - "# Ensure main returns an integer value"
+    - "# Example:"
+    - "# return 0;"
+    - "}"
+
+verification:
+  success_criteria:
+    - compilation succeeds without errors
+    - main function returns int
+

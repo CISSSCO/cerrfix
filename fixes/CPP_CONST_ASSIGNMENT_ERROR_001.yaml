@@ -1,0 +1,56 @@
+schema_version: 1.0
+
+issue_id: CPP_CONST_ASSIGNMENT_ERROR_001
+title: "Assignment to const (read-only) variable"
+
+category: programming
+subcategory: cpp
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "assignment of read-only variable"
+
+description: >
+  Compilation fails because a variable declared as const
+  is being assigned a new value after initialization.
+
+root_cause:
+  summary: "Variable declared const but later modified"
+  details: >
+    In C++, variables declared with the const qualifier
+    become read-only after initialization. Any attempt
+    to modify them results in a compilation error.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Locate the variable declaration"
+    - "# Example:"
+    - "# const int a = 5;"
+
+    - "# Do NOT assign a new value to a const variable"
+    - "# Incorrect: a = 7;"
+
+    - "# Option 1: Remove const if modification is required"
+    - "# int a = 5;"
+
+    - "# Option 2: Initialize const variable with correct value"
+    - "# const int a = 7;"
+
+    - "# Option 3: Use a separate mutable variable"
+    - "# int b = a;"
+    - "# b = 7;"
+
+verification:
+  success_criteria:
+    - compilation succeeds without errors
+    - no assignment to const variables remains
+
