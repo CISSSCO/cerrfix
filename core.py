@@ -72,7 +72,9 @@ def stats():
     for fix_file in FIX_DIR.glob("*.yaml"):
         try:
             fix = load_and_validate_fix(fix_file)
-        except Exception:
+        except Exception as e:
+            # print the names of the files if validation failed
+            console.print(f"[red]Invalid fix:[/red] {fix_file.name} → {e}")
             invalid += 1
             continue
 
