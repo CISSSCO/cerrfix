@@ -1,0 +1,41 @@
+schema_version: 1.0
+
+issue_id: PYTHON_ATTRIBUTE_ERROR_001
+title: "AttributeError: object has no attribute"
+
+category: programming
+subcategory: python
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "AttributeError: .* has no attribute"
+
+description: >
+  An attribute or method was accessed on an object that does not support it.
+
+root_cause:
+  summary: Invalid attribute access
+  details: >
+    The object type does not define the requested attribute.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Check the object type"
+    - "print(type(object))"
+
+    - "# Verify valid attributes using dir()"
+    - "dir(object)"
+
+verification:
+  success_criteria:
+    - no AttributeError raised
+

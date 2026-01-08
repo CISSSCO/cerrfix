@@ -1,0 +1,40 @@
+schema_version: 1.0
+
+issue_id: PYTHON_INDEX_ERROR_001
+title: "IndexError: list index out of range"
+
+category: programming
+subcategory: python
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "IndexError: list index out of range"
+
+description: >
+  Attempted to access a list index that does not exist.
+
+root_cause:
+  summary: Invalid list index
+  details: >
+    The index used exceeds the list size.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Check list length before accessing elements"
+    - "len(my_list)"
+
+    - "# Ensure index is within valid range"
+
+verification:
+  success_criteria:
+    - program executes without IndexError
+

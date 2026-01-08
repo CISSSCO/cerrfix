@@ -165,6 +165,12 @@ def diagnose(
     print(f"Description : {fix.get('title', 'N/A')}")
     print(f"Category    : {fix.get('category', 'unknown')}")
     print(f"Severity    : {fix.get('severity', 'unknown')}")
+    # Root cause (pretty format)
+    root = fix.get("root_cause")
+    if isinstance(root, dict):
+        print("\n[bold]🧠 Root Cause:[/bold]")
+        print(f"  Summary : {root.get('summary', 'N/A')}")
+        print(f"  Details : {root.get('details', 'N/A')}")
 
     print("\n[bold]🔧 Suggested Fix:[/bold]")
     for step in fix["resolution"]["steps"]:

@@ -1,0 +1,41 @@
+schema_version: 1.0
+
+issue_id: PYTHON_KEY_ERROR_001
+title: "KeyError: dictionary key not found"
+
+category: programming
+subcategory: python
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "KeyError"
+
+description: >
+  A dictionary key was accessed that does not exist.
+
+root_cause:
+  summary: Missing dictionary key
+  details: >
+    The key may be missing or incorrectly named.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Check available keys"
+    - "dict.keys()"
+
+    - "# Use get() to avoid KeyError"
+    - "dict.get('key', default)"
+
+verification:
+  success_criteria:
+    - program runs without KeyError
+

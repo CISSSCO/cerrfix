@@ -1,0 +1,49 @@
+schema_version: 1.0
+
+issue_id: CPP_VARIABLE_REDECLARATION_001
+title: "Variable redeclared in the same scope"
+
+category: programming
+subcategory: cpp
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "(redeclaration of.*int|previously declared here)"
+
+description: >
+  Compilation fails because a variable is declared more than once
+  within the same scope.
+
+root_cause:
+  summary: Duplicate variable declaration
+  details: >
+    The same variable name is declared multiple times in the same scope.
+    In C++, variables must be declared once and reassigned if needed.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Identify the original variable declaration"
+    - "# Example:"
+    - "# int a = 5;"
+
+    - "# Do not redeclare the variable in the same scope"
+    - "# Incorrect:"
+    - "# int a = 7;"
+
+    - "# Correct approach: assign a new value"
+    - "a = 7;"
+
+verification:
+  success_criteria:
+    - compilation succeeds
+    - no redeclaration errors reported
+

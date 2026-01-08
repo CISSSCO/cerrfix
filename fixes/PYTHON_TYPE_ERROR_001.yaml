@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: PYTHON_TYPE_ERROR_001
+title: "TypeError due to incompatible types"
+
+category: programming
+subcategory: python
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "TypeError"
+
+description: >
+  An operation was applied to incompatible data types.
+
+root_cause:
+  summary: Invalid operation between types
+  details: >
+    Python enforces type rules at runtime, causing errors when
+    incompatible types are used together.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Inspect variable types using type()"
+    - "print(type(variable))"
+
+    - "# Convert data types explicitly if needed"
+    - "# Example: int('5')"
+
+verification:
+  success_criteria:
+    - program runs without TypeError
+

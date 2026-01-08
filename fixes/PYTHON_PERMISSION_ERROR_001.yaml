@@ -1,0 +1,41 @@
+schema_version: 1.0
+
+issue_id: PYTHON_PERMISSION_ERROR_001
+title: "PermissionError while accessing file"
+
+category: programming
+subcategory: python
+severity: error
+confidence: medium
+
+scope:
+  machine: generic
+  environment: linux
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "PermissionError"
+
+description: >
+  Python does not have permission to access a file or directory.
+
+root_cause:
+  summary: Insufficient file permissions
+  details: >
+    The user lacks read, write, or execute permission for the resource.
+
+resolution:
+  strategy: manual
+  risk_level: medium
+  steps:
+    - "# Check file permissions"
+    - "ls -l filename"
+
+    - "# Adjust permissions if necessary"
+    - "chmod u+rw filename"
+
+verification:
+  success_criteria:
+    - file access succeeds
+
