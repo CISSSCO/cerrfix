@@ -1,0 +1,41 @@
+schema_version: 1.0
+
+issue_id: JAVA_NULL_POINTER_001
+title: Java application crashes due to null object reference
+
+category: logic
+subcategory: java
+severity: error
+confidence: medium
+
+scope:
+  machine: generic
+  environment: jvm
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "java.lang.NullPointerException"
+
+description: >
+  Java application encounters a NullPointerException during execution.
+
+root_cause:
+  summary: Uninitialized or unexpected null reference
+  details: >
+    The application attempts to access a method or field on a null object.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Identify the source of the null reference"
+    - review stack trace in logs
+
+    - "# Add null checks or proper initialization"
+    - validate object creation paths
+
+verification:
+  success_criteria:
+    - application executes without NullPointerException
+

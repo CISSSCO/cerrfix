@@ -1,0 +1,43 @@
+schema_version: 1.0
+
+issue_id: JAVA_NO_CLASS_DEF_FOUND_001
+title: Java runtime fails due to NoClassDefFoundError
+
+category: runtime
+subcategory: java
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: jvm
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "java.lang.NoClassDefFoundError"
+
+description: >
+  Java application encounters NoClassDefFoundError indicating that
+  a class available at compile time is missing at runtime.
+
+root_cause:
+  summary: Compile-time and runtime classpath mismatch
+  details: >
+    The application was compiled successfully, but required classes
+    are missing when executed.
+
+resolution:
+  strategy: manual
+  risk_level: medium
+  steps:
+    - "# Compare compile-time and runtime dependencies"
+    - mvn dependency:tree || gradle dependencies
+
+    - "# Ensure all required JARs are available at runtime"
+    - ls -l lib/
+
+verification:
+  success_criteria:
+    - application runs without NoClassDefFoundError
+

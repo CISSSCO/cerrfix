@@ -1,0 +1,46 @@
+schema_version: 1.0
+
+issue_id: JAVA_CLASS_NOT_FOUND_001
+title: Java application fails due to missing class at runtime
+
+category: runtime
+subcategory: java
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: jvm
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "java.lang.ClassNotFoundException"
+
+description: >
+  Java application fails to start or crashes at runtime because
+  a required class cannot be found on the classpath.
+
+root_cause:
+  summary: Missing dependency or incorrect classpath
+  details: >
+    The required class is not available in the runtime classpath,
+    often due to missing JAR files or incorrect dependency configuration.
+
+resolution:
+  strategy: manual
+  risk_level: medium
+  steps:
+    - "# Verify required JAR files are present"
+    - ls -l *.jar
+
+    - "# Check classpath configuration"
+    - echo $CLASSPATH
+
+    - "# Rebuild the project to ensure dependencies are packaged"
+    - mvn clean package || gradle build
+
+verification:
+  success_criteria:
+    - application starts without ClassNotFoundException
+

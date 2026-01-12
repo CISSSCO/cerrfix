@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: JAVA_FILE_NOT_FOUND_001
+title: Java application fails due to missing file
+
+category: io
+subcategory: filesystem
+severity: error
+confidence: medium
+
+scope:
+  machine: generic
+  environment: jvm
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "java.io.FileNotFoundException"
+
+description: >
+  Java application attempts to access a file that does not exist
+  or is not accessible.
+
+root_cause:
+  summary: Missing or incorrect file path
+  details: >
+    The file path is incorrect or the file lacks proper permissions.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Verify file exists"
+    - ls -l <file-path>
+
+    - "# Check file permissions"
+    - chmod +r <file-path>
+
+verification:
+  success_criteria:
+    - application accesses file without FileNotFoundException
+
