@@ -1,0 +1,41 @@
+schema_version: 1.0
+
+issue_id: JAVA_STACK_OVERFLOW_001
+title: Java application crashes due to stack overflow
+
+category: runtime
+subcategory: java
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: jvm
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "java.lang.StackOverflowError"
+
+description: >
+  Java application crashes due to excessive recursion or deep call stacks.
+
+root_cause:
+  summary: Infinite or deep recursion
+  details: >
+    Recursive method calls exceed the JVM stack size limit.
+
+resolution:
+  strategy: manual
+  risk_level: medium
+  steps:
+    - "# Review recursive methods for proper termination conditions"
+    - grep -R "recursiveMethod" src/
+
+    - "# Increase stack size if necessary"
+    - java -Xss2M -jar application.jar
+
+verification:
+  success_criteria:
+    - application runs without StackOverflowError
+

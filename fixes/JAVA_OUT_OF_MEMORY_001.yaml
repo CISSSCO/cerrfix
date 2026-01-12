@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: JAVA_OUT_OF_MEMORY_001
+title: Java application crashes due to heap memory exhaustion
+
+category: performance
+subcategory: memory
+severity: critical
+confidence: high
+
+scope:
+  machine: generic
+  environment: jvm
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "java.lang.OutOfMemoryError"
+
+description: >
+  Java Virtual Machine runs out of heap memory during application execution.
+
+root_cause:
+  summary: Insufficient heap size or memory leak
+  details: >
+    The JVM heap is too small for the workload or the application
+    retains objects longer than necessary.
+
+resolution:
+  strategy: manual
+  risk_level: medium
+  steps:
+    - "# Increase maximum heap size"
+    - java -Xmx2G -jar application.jar
+
+    - "# Analyze heap usage using a profiler"
+    - jmap -histo <pid>
+
+verification:
+  success_criteria:
+    - application runs without OutOfMemoryError
+

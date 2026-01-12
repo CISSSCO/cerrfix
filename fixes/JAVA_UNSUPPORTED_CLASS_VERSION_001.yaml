@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: JAVA_UNSUPPORTED_CLASS_VERSION_001
+title: Java application fails due to unsupported class version
+
+category: compatibility
+subcategory: java
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: jvm
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "Unsupported (major|minor) version"
+
+description: >
+  Java application fails to run because it was compiled with a newer
+  Java version than the runtime supports.
+
+root_cause:
+  summary: JDK and runtime version mismatch
+  details: >
+    The compiled bytecode is incompatible with the installed Java runtime.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Check Java runtime version"
+    - java -version
+
+    - "# Recompile application with compatible target version"
+    - mvn clean package -Dmaven.compiler.target=11
+
+verification:
+  success_criteria:
+    - application starts without version-related errors
+
