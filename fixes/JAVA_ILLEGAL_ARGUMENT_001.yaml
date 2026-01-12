@@ -1,0 +1,38 @@
+schema_version: 1.0
+
+issue_id: JAVA_ILLEGAL_ARGUMENT_001
+title: Java application fails due to invalid method arguments
+
+category: logic
+subcategory: java
+severity: error
+confidence: medium
+
+scope:
+  machine: generic
+  environment: jvm
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "java.lang.IllegalArgumentException"
+
+description: >
+  A Java method receives arguments that violate its expected constraints.
+
+root_cause:
+  summary: Invalid or unchecked input values
+  details: >
+    Input parameters are not validated before being passed to methods.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Validate input parameters"
+    - add input validation logic
+
+verification:
+  success_criteria:
+    - application executes without IllegalArgumentException
+

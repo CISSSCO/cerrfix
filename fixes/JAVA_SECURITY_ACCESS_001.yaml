@@ -1,0 +1,42 @@
+schema_version: 1.0
+
+issue_id: JAVA_SECURITY_ACCESS_001
+title: Java application blocked by security access control
+
+category: security
+subcategory: java
+severity: error
+confidence: high
+
+scope:
+  machine: generic
+  environment: jvm
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "java.security.AccessControlException"
+
+description: >
+  Java security manager denies access to a restricted operation.
+
+root_cause:
+  summary: Insufficient security permissions
+  details: >
+    Application does not have required permissions defined
+    in the Java security policy.
+
+resolution:
+  strategy: manual
+  risk_level: high
+  steps:
+    - "# Review Java security policy"
+    - locate java.policy file
+
+    - "# Grant required permissions cautiously"
+    - update policy configuration
+
+verification:
+  success_criteria:
+    - application performs operation without security exception
+

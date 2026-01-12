@@ -1,0 +1,38 @@
+schema_version: 1.0
+
+issue_id: JAVA_NUMBER_FORMAT_001
+title: Java application fails due to invalid numeric parsing
+
+category: data
+subcategory: parsing
+severity: error
+confidence: medium
+
+scope:
+  machine: generic
+  environment: jvm
+  os: generic
+
+error_signature:
+  type: regex
+  pattern: "java.lang.NumberFormatException"
+
+description: >
+  Application attempts to parse non-numeric data into a numeric type.
+
+root_cause:
+  summary: Invalid numeric input
+  details: >
+    Input string does not conform to expected numeric format.
+
+resolution:
+  strategy: manual
+  risk_level: low
+  steps:
+    - "# Validate numeric input before parsing"
+    - add input format checks
+
+verification:
+  success_criteria:
+    - application handles numeric parsing without exceptions
+
